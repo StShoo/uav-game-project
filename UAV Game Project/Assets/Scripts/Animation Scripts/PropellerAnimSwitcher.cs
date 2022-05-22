@@ -19,7 +19,7 @@ public class PropellerAnimSwitcher : MonoBehaviour
         {
             animator.SetBool("isBusted", true);
         }
-        else if (Input.GetAxisRaw("Acceleration") > 0)
+        else if (Input.GetAxisRaw("Acceleration") < 0)
         {
             animator.SetBool("isSlowedDown", true);
         }
