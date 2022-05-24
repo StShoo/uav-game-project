@@ -6,15 +6,20 @@ using UnityEngine.UI;
 
 public class HideElements : MonoBehaviour
 {
-    public GameObject inGameMenu = new GameObject();
+    public GameObject inGameMenu;
     private bool isGamePaused;
-
+    
     private void Start()
     {
         isGamePaused = false;
     }
 
-    private void Update()
+    private void Awake()
+    {
+        HideMenu();
+        ResumeGame();
+    }
+    private void LateUpdate()
     {
         if (isGamePaused)
         {
@@ -35,12 +40,9 @@ public class HideElements : MonoBehaviour
             }
         }
     }
-    private void Awake()
-    {
-        HideMenu();
-        ResumeGame();
-    }
-
+    
+    
+    
     public void HideMenu()
     {
         inGameMenu.SetActive(false);
