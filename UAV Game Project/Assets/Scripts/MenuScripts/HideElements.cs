@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class HideElements : MonoBehaviour
 {
     public GameObject inGameMenu;
+    public GameObject crossHair;
     private bool isGamePaused;
     
     private void Start()
@@ -46,11 +47,13 @@ public class HideElements : MonoBehaviour
     public void HideMenu()
     {
         inGameMenu.SetActive(false);
+        crossHair.SetActive(true);
     }
 
     public void ShowMenu()
     {
         inGameMenu.SetActive(true);
+        crossHair.SetActive(false);
     }
     
     public void PauseGame ()
