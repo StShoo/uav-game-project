@@ -32,10 +32,6 @@ public class FirstPersonCameraController : MonoBehaviour
         mouseDistance.y = (lookInput.y - screenCentre.y) / screenCentre.y;
 
         Quaternion currentRotation = transform.rotation;
-        
-        
-        Debug.Log("Mouse Vector:" + mouseDistance.y);
-        Debug.Log("X axis of rotation:" + currentRotation.eulerAngles.x);
 
         if (currentRotation.eulerAngles.x > xMaxRotation)
         {
@@ -74,13 +70,11 @@ public class FirstPersonCameraController : MonoBehaviour
     {
         transform.Rotate(-mouseDistance.y * lookRoteSpeed * Time.deltaTime,
             mouseDistance.x * lookRoteSpeed * Time.deltaTime, 0,Space.Self);
-        Debug.Log("Go On");
     }
 
     private void RotateWithoutX()
     {
         transform.Rotate(0,
             mouseDistance.x * lookRoteSpeed * Time.deltaTime, 0,Space.Self);
-        Debug.Log("Stop Rotation");
     }
 }
