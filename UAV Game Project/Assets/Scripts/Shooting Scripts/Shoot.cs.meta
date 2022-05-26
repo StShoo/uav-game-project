@@ -3,7 +3,11 @@ guid: d017a07da34c3054c842b355a89cac51
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - firstPersonCam: {instanceID: 0}
+  - rocketShootSound: {instanceID: 0}
+  - explosionSound: {instanceID: 0}
+  - explosion: {fileID: 848409688036902950, guid: 23436acff47173745ba19c09729211f7, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

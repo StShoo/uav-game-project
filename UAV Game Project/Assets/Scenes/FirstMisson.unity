@@ -2284,6 +2284,7 @@ MonoBehaviour:
   firstPersonCam: {fileID: 1628925826}
   rocketShootSound: {fileID: 1628925829}
   explosionSound: {fileID: 1628925830}
+  explosion: {fileID: 848409688036902950, guid: 23436acff47173745ba19c09729211f7, type: 3}
 --- !u!82 &1628925829
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3238,6 +3239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameMenu: {fileID: 807376567}
+  crossHair: {fileID: 1824749803}
 --- !u!82 &2068143579
 AudioSource:
   m_ObjectHideFlags: 0

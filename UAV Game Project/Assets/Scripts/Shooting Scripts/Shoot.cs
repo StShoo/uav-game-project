@@ -13,7 +13,8 @@ public class Shoot : MonoBehaviour
     public AudioSource rocketShootSound;
     public AudioSource explosionSound;
 
-    
+    public GameObject explosion;
+
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -40,10 +41,13 @@ public class Shoot : MonoBehaviour
     {
         rocketShootSound.Play();
         yield return new WaitForSeconds(1);
+        
         if (hit.transform.CompareTag("Enemy"))
         {
             Kill(hit.transform.gameObject);
         }
+
+        Instantiate(explosion, hit.point, Quaternion.LookRotation(hit.normal));
         explosionSound.Play();
     }
 }
