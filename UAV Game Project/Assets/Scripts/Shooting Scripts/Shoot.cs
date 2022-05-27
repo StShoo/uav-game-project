@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
-    public float damage = 1f;
-    public float range = 100f;
-
     public Camera firstPersonCam;
-    private GameObject target;
     public AudioSource rocketShootSound;
     public AudioSource explosionSound;
 

@@ -8,9 +8,18 @@ public class PlaneMovement : MonoBehaviour
     public float forwardSpeed = 25f, accelerationSpeed = 5f, flightDirectionSpeed = 30f, rotationSpeed = 20f;
     private float activeForwardSpeed, activeAcceleration, activeFlightDirection, activeRotationSpeed;
     private float forwardAcceleration = 2.5f, changeDirectionAcceleration = 2f, rotationAcceleration = 2f;
+
+    private bool crushed = false;
     
     void FixedUpdate()
     {
+        if (crushed)
+        {
+            forwardSpeed = 0;
+            accelerationSpeed = 0;
+            flightDirectionSpeed = 0;
+            rotationSpeed = 0;
+        }
         CalculateActiveForwardSpeed();
         CalculateActiveDirection();
         CalculateActiveRotationSpeed();
@@ -44,5 +53,10 @@ public class PlaneMovement : MonoBehaviour
     {
         activeRotationSpeed = Mathf.Lerp(activeRotationSpeed, Input.GetAxis("Horizontal") * rotationSpeed,
             rotationAcceleration * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        crushed = true;
     }
 }

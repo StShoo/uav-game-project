@@ -8,7 +8,11 @@ public class HideElements : MonoBehaviour
 {
     public GameObject inGameMenu;
     public GameObject crossHair;
+    public GameObject inGameDeathMenu;
     private bool isGamePaused;
+    
+    public AudioSource explosionSound;
+    public ParticleSystem explosion;
     
     private void Start()
     {
@@ -17,7 +21,8 @@ public class HideElements : MonoBehaviour
 
     private void Awake()
     {
-        HideMenu();
+        HideUIElement(inGameMenu);
+        HideUIElement(inGameDeathMenu);
         ResumeGame();
     }
     private void LateUpdate()
@@ -26,7 +31,8 @@ public class HideElements : MonoBehaviour
         {
             if (Input.GetButtonDown("Cancel"))
             {
-                HideMenu();
+                HideUIElement(inGameMenu);
+                ShowUIElement(crossHair);
                 ResumeGame();
                 isGamePaused = false;
             }
@@ -35,27 +41,29 @@ public class HideElements : MonoBehaviour
         {
             if (Input.GetButtonDown("Cancel"))
             {
-                ShowMenu();
+                ShowUIElement(inGameMenu);
+                HideUIElement(crossHair);
                 PauseGame();
                 isGamePaused = true;
             }
         }
     }
     
-    
-    
-    public void HideMenu()
+    private void OnTriggerEnter(Collider other)
     {
-        inGameMenu.SetActive(false);
-        crossHair.SetActive(true);
+        StartCoroutine(WaitBeforeExplode());
+    }
+    
+    private void HideUIElement(GameObject uiElement)
+    {
+        uiElement.SetActive(false);
     }
 
-    public void ShowMenu()
+    private void ShowUIElement(GameObject uiElement)
     {
-        inGameMenu.SetActive(true);
-        crossHair.SetActive(false);
+        uiElement.SetActive(true);
     }
-    
+
     public void PauseGame ()
     {
         Time.timeScale = 0;
@@ -63,5 +71,19 @@ public class HideElements : MonoBehaviour
     public void ResumeGame ()
     {
         Time.timeScale = 1;
+    }
+
+    private void Kill()
+    {
+        Destroy(gameObject);
+    }
+    
+    private IEnumerator WaitBeforeExplode()
+    {
+        explosion.Play();
+        explosionSound.Play();
+        ShowUIElement(inGameDeathMenu);
+        yield return new WaitForSeconds(1);
+        Kill();
     }
 }
