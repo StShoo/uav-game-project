@@ -2333,11 +2333,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2068143578}
         m_TargetAssemblyTypeName: HideElements, Assembly-CSharp
-        m_MethodName: HideMenu
-        m_Mode: 1
+        m_MethodName: HideUIElement
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 807376567}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3974,8 +3974,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1628925824}
-  - {fileID: 1288433434}
   - {fileID: 1644426460}
+  - {fileID: 1288433434}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

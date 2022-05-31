@@ -54,12 +54,12 @@ public class HideElements : MonoBehaviour
         StartCoroutine(WaitBeforeExplode());
     }
     
-    private void HideUIElement(GameObject uiElement)
+    public void HideUIElement(GameObject uiElement)
     {
         uiElement.SetActive(false);
     }
 
-    private void ShowUIElement(GameObject uiElement)
+    public void ShowUIElement(GameObject uiElement)
     {
         uiElement.SetActive(true);
     }
