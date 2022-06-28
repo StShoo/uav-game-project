@@ -6,13 +6,26 @@ using UnityEngine.UI;
 
 public class HideElements : MonoBehaviour
 {
+    [Header("Menu Objects")]
     public GameObject inGameMenu;
     public GameObject crossHair;
     public GameObject inGameDeathMenu;
+    public GameObject inGameWinMenu;
     private bool isGamePaused;
     
+    [Header("Explosion")]
     public AudioSource explosionSound;
     public ParticleSystem explosion;
+
+    [Header("Win conditions")]
+    public bool winCondition;
+
+    [Header("Propeller Sound")] 
+    public AudioSource propellerSound;
+
+    
+    private Menu menu;
+    private Shoot shoot;
     
     private void Start()
     {
@@ -21,30 +34,41 @@ public class HideElements : MonoBehaviour
 
     private void Awake()
     {
+        menu = FindObjectOfType<Menu>();
+        shoot = GetComponentInChildren<Shoot>();
+        
         HideUIElement(inGameMenu);
         HideUIElement(inGameDeathMenu);
+        HideUIElement(inGameWinMenu);
         ResumeGame();
     }
     private void LateUpdate()
     {
-        if (isGamePaused)
+        CheckWinCondition();
+        
+        if (winCondition)
         {
-            if (Input.GetButtonDown("Cancel"))
-            {
-                HideUIElement(inGameMenu);
-                ShowUIElement(crossHair);
-                ResumeGame();
-                isGamePaused = false;
-            }
+            StartCoroutine(WaitBeforeWin());
         }
         else
         {
-            if (Input.GetButtonDown("Cancel"))
+            if (isGamePaused)
             {
-                ShowUIElement(inGameMenu);
-                HideUIElement(crossHair);
-                PauseGame();
-                isGamePaused = true;
+                if (Input.GetButtonDown("Cancel"))
+                {
+                    HideUIElement(inGameMenu);
+                    ShowUIElement(crossHair);
+                    ResumeGame();
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown("Cancel"))
+                {
+                    ShowUIElement(inGameMenu);
+                    HideUIElement(crossHair);
+                    PauseGame();
+                }
             }
         }
     }
@@ -64,13 +88,15 @@ public class HideElements : MonoBehaviour
         uiElement.SetActive(true);
     }
 
-    public void PauseGame ()
+    public void PauseGame()
     {
         Time.timeScale = 0;
+        isGamePaused = true;
     }
     public void ResumeGame ()
     {
         Time.timeScale = 1;
+        isGamePaused = false;
     }
 
     private void Kill()
@@ -85,5 +111,24 @@ public class HideElements : MonoBehaviour
         ShowUIElement(inGameDeathMenu);
         yield return new WaitForSeconds(1);
         Kill();
+    }
+    
+    private IEnumerator WaitBeforeWin()
+    {
+        ShowUIElement(inGameWinMenu);
+        yield return new WaitForSeconds(4);
+        menu.IntoMainMenu();
+    }
+
+    private void CheckWinCondition()
+    {
+        if (shoot.destroyedTanksCounter >= 5)
+        {
+            winCondition = true;
+        }
+        else
+        {
+            winCondition = false;
+        }
     }
 }
