@@ -10,6 +10,12 @@ public class Shoot : MonoBehaviour
     public AudioSource explosionSound;
 
     public GameObject explosion;
+    public int destroyedTanksCounter;
+
+    private void Start()
+    {
+        destroyedTanksCounter = 0;
+    }
 
     void Update()
     {
@@ -22,6 +28,7 @@ public class Shoot : MonoBehaviour
     private void ShootRocket()
     {
         RaycastHit hit;
+
         if (Physics.Raycast(firstPersonCam.transform.position, firstPersonCam.transform.forward, out hit))
         {
             StartCoroutine(WaitBeforeExplode(hit));
@@ -41,6 +48,7 @@ public class Shoot : MonoBehaviour
         if (hit.transform.CompareTag("Enemy"))
         {
             Kill(hit.transform.gameObject);
+            destroyedTanksCounter++;
         }
 
         Instantiate(explosion, hit.point, Quaternion.LookRotation(hit.normal));
