@@ -11,6 +11,7 @@ public class HideElements : MonoBehaviour
     public GameObject crossHair;
     public GameObject inGameDeathMenu;
     public GameObject inGameWinMenu;
+    public GameObject inGameTask;
     private bool isGamePaused;
     
     [Header("Explosion")]
@@ -26,6 +27,7 @@ public class HideElements : MonoBehaviour
     
     private Menu menu;
     private Shoot shoot;
+    //private TaskProgress taskProgress;
     
     private void Start()
     {
@@ -115,6 +117,7 @@ public class HideElements : MonoBehaviour
     
     private IEnumerator WaitBeforeWin()
     {
+        HideUIElement(inGameTask);
         ShowUIElement(inGameWinMenu);
         yield return new WaitForSeconds(4);
         menu.IntoMainMenu();
